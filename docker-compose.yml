@@ -1,0 +1,27 @@
+version: "3"
+services:
+
+  app:
+    container_name: library_graph
+    tty: true
+    build:
+      context: ./
+      dockerfile: .docker/node/Dockerfile
+      args:
+        UID: 1000
+        GID: 1000
+    volumes:
+      - "./:/var/www/html"
+    ports:
+      - "4000:4000"
+      - "9229:9229" #debug port 
+    depends_on:
+      - mongo
+
+  mongo:
+    container_name: library_graph_db
+    build:
+      context: ./
+      dockerfile: .docker/mongo/Dockerfile
+    ports:
+      - "27017:27017"

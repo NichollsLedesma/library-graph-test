@@ -1,0 +1,5 @@
+run
+docker-compose up --build
+
+enter container
+docker-compose exec app bash
